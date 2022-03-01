@@ -9,7 +9,7 @@ function new_form () {
                 <form method="POST" action="/places">
                     <div className="form-group">
                         <label htmlFor="name">Place Name</label>
-                        <input className="form-control" id="name" name="name" />
+                        <input className="form-control" id="name" name="name" required />
                     </div>
                     <div className="form-group">
                         <label htmlFor="pic">Place Picture</label>
