@@ -21,7 +21,7 @@ function Def (html) {
                     <a href="/places/new">Add Place</a>
                     </li>
                 </ul>
-                </nav>
+            </nav>
                 {html.children}
             </body>
         </html>
