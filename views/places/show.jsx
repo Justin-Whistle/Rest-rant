@@ -37,7 +37,7 @@ function show (data) {
                             Rating
                         </h2>
                         <h2>
-                            Description
+                            Description:
                         </h2>
                         <h3>
                             {data.place.showEstablished()}
@@ -48,14 +48,44 @@ function show (data) {
                         <p>
                             no ratings yet
                         </p>
-                        <a href={`/places/${data.id}/edit`} className="btn btn-warning"> 
-                            Edit
-                        </a>  
-                        <form method="POST" action={`/places/${data.id}?_method=DELETE `}> 
-                            <button type="submit" className="btn btn-danger">
-                                Delete
-                            </button>
-                        </form>
+                        <div className="row">
+                            <div className="col-sm-6">
+                                <a href={`/places/${data.id}/edit`} className="btn btn-warning"> 
+                                    Edit
+                                </a>
+                            </div> 
+                            <div className="col-sm-6">
+                                <form method="POST" action={`/places/${data.id}comments`}> 
+                                    <button type="submit" className="btn btn-danger">
+                                        Delete
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h2>Got Your Own Rant or Rave?</h2>
+                        <form method="POST" action={`/places/${data.id}?_method=POST `}>
+                            <div className="form-group col-sm-12">
+                                <label htmlFor="content">Content</label>
+                                <textarea id="content" name="content" class="form-control"></textarea> 
+                            </div>
+                            <div class="row">
+                                <div className="form-group col-sm-4">
+                                    <label htmlFor="author">Author</label>
+                                    <input className="form-control" id="author" name="author" />
+                                </div>
+                                <div className="form-group col-sm-4">
+                                    <label htmlFor="stars">Star Rating</label>
+                                    <input type="range" step="0.5" min="1" max="5" className="form-control" id="stars" name="stars"  />
+                                </div>
+                                <div className="form-group col-sm-3">
+                                    <label htmlFor="rant">Rant?</label>
+                                    <input type="checkbox" ClassName="form-control" id="rant" name="rant" />
+                                </div>
+                                <input className="btn btn-primary" type="submit" value="Add Comment" />
+                            </div>
+                        </form> 
                     </div>
                 </div>
                 <h2>Comments</h2>

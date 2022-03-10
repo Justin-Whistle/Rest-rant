@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const db = require('../models')
 
+//Get Index page
 router.get('/', (req, res) => {
   db.Place.find()
   .then((places) => {
@@ -12,6 +13,7 @@ router.get('/', (req, res) => {
   })
 })
 
+//Create new place
 router.post('/', (req, res) => {
   db.Place.create(req.body)
   .then(() => {
@@ -26,6 +28,7 @@ router.post('/', (req, res) => {
 router.get('/new', (req, res) => {
   res.render('places/new')
 })
+
 //Show page
 router.get('/:id', (req, res) => {
   db.Place.findById(req.params.id)
@@ -101,6 +104,28 @@ router.post('/:id/rant', (req, res) => {
 
 router.delete('/:id/rant/:rantId', (req, res) => {
     res.send('GET /places/:id/rant/:rantId stub')
+})
+
+//Adding a comment
+router.post('/:id/comment', (req, res) => {
+  console.log(req.body)
+  db.Place.findById(req.params.id)
+  .then(place => {
+      db.Comment.create(req.body)
+      .then(comment => {
+          place.comments.push(comment.id)
+          place.save()
+          .then(() => {
+              res.redirect(`/places/${req.params.id}`)
+          })
+      })
+      .catch(err => {
+          res.render('error404')
+      })
+  })
+  .catch(err => {
+      res.render('error404')
+  })
 })
 
 module.exports = router
