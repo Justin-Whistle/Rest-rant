@@ -22,16 +22,19 @@ function show (data) {
               {averageRating} stars
             </h3>
         )
-        comments = data.place.comments.map(c => {
+        comments = data.place.comments.map(comment => {
             return (
-              <div className="border">
-                <h2 className="rant">{c.rant ? 'Rant! 😡' : 'Rave! 😻'}</h2>
-                <h4>{c.content}</h4>
-                <h3>
-                  <stong>- {c.author}</stong>
-                </h3>
-                <h4>Rating: {c.stars}</h4>
-              </div>
+                <div key={comment.id} className="border">
+                    <h2 className="rant">{comment.rant ? "Rant! 😡" : "Rave! 😻"}</h2>
+                    <h4>{comment.content}</h4>
+                    <h3>
+                        <strong>- {comment.author}</strong>
+                    </h3>
+                    <h4>Rating: {comment.stars}</h4>
+                    <form method="POST" action={`/places/${data.place.id}/comment/${comment.id}?_method=DELETE`}>
+                        <input type="submit" className="btn btn-danger" value="Delete Comment"/>
+                    </form>
+                </div>
             )
         })
     }
@@ -64,12 +67,12 @@ function show (data) {
                         </p>
                         <div className="row">
                             <div className="col-sm-6">
-                                <a href={`/places/${data.id}/edit`} className="btn btn-warning"> 
+                                <a href={`/places/${data.i}/edit`} className="btn btn-warning"> 
                                     Edit
                                 </a>
                             </div> 
                             <div className="col-sm-6">
-                                <form method="POST" action={`/places/${data.id}?_method=DELETE`}>
+                                <form method="POST" action={`/places/${data.place.id}?_method=DELETE`}>
                                     <button type="submit" className="btn btn-danger">
                                         Delete
                                     </button>
@@ -78,32 +81,32 @@ function show (data) {
                         </div>
                     </div>
                     <div>
-                        <h2>Got Your Own Rant or Rave?</h2>
-                        <form method="POST" action={`/comments${data.id}?_method=POST`}>
+                        <h3>Got Your Own Rant or Rave?</h3>
+                        <h4>Comments:</h4>
+                            {comments}
+                        <form method="POST" action={`/places/${data.place.id}/comment`} method="POST">
                             <div className="form-group col-sm-12">
                                 <label htmlFor="content">Content</label>
-                                <textarea id="content" name="content" class="form-control" value={comments.content}></textarea> 
+                                <textarea id="content" name="content" class="form-control"></textarea> 
                             </div>
                             <div class="row">
                                 <div className="form-group col-sm-4">
                                     <label htmlFor="author">Author</label>
-                                    <input className="form-control" id="author" name="author" value={comments.author} />
+                                    <input className="form-control" id="author" name="author"/>
                                 </div>
                                 <div className="form-group col-sm-4">
                                     <label htmlFor="stars">Star Rating</label>
-                                    <input type="range" step="0.5" min="1" max="5" className="form-control" id="stars" name="stars" value={comments.stars} />
+                                    <input type="range" step="0.5" min="1" max="5" className="form-control" id="stars" name="stars"/>
                                 </div>
                                 <div className="form-group col-sm-3">
                                     <label htmlFor="rant">Rant?</label>
-                                    <input type="checkbox" ClassName="form-control" id="rant" name="rant" value={comments.rant} />
+                                    <input type="checkbox" ClassName="form-control" id="rant" name="rant"/>
                                 </div>
-                                <input className="btn btn-primary" type="submit" value="Add Comments" />
+                                <button className="btn btn-primary" type="submit">Submit</button>
                             </div>
                         </form> 
                     </div>
                 </div>
-                <h2>Comments</h2>
-                {comments}
             </main>        
         </Def>
     )
