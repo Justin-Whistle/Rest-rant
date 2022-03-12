@@ -71,7 +71,7 @@ function show (data) {
                         </h4>
                         <div className="row">
                             <div className="col-sm-6">
-                                <a href={`/places/${data.i}/edit`} className="btn btn-warning"> 
+                            <a href={`/places/${data.place.id}/edit`} className="btn btn-warning">
                                     Edit 
                                 </a>
                             </div> 
