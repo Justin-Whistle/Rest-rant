@@ -1,7 +1,7 @@
 const router = require('express').Router()
 const db = require('../models')
 
-//Get Index page
+//Index page
 router.get('/', (req, res) => {
   db.Place.find()
   .then((places) => {
@@ -43,19 +43,39 @@ router.get('/:id', (req, res) => {
   })
 })
 
+//edit page
+router.get('/:id/edit', (req, res) => {
+  db.Place.findById(req.params.id)
+  .then(place => {
+      res.render('places/edit', { place })
+  })
+  .catch(err => {
+      res.render('error404')
+  })
+})
+
 // Update place
 router.put('/:id', (req, res) => {
-  res.send('PUT /places/:id STUB')
+  db.Place.findByIdAndUpdate(req.params.id, req.body)
+  .then(() => {
+      res.redirect(`/places/${req.params.id}`)
+  })
+  .catch(err => {
+      console.log('err', err)
+      res.render('error404')
+  })
 })
 
 //Delete /Places
 router.delete('/:id', (req, res) => {
-  res.send('DELETE /places/:id STUB')
-})
-
-//edit page
-router.get('/:id/edit', (req, res) => {
-  res.send('GET edit form stub')
+  db.Place.findByIdAndDelete(req.params.id)
+  .then(place => {
+      res.redirect('/places')
+  })
+  .catch(err => {
+      console.log('err', err)
+      res.render('error404')
+  })
 })
 
 //Adding a comment

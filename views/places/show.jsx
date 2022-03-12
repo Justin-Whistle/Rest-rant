@@ -16,10 +16,14 @@ function show (data) {
         let sumRatings = data.place.comments.reduce((tot, c) => {
             return tot + c.stars
         }, 0)
-        let averageRating = sumRatings / data.place.comments.length
+        let averageRating = Math.round(sumRatings / data.place.comments.length)
+        let stars = ''
+        for (let i = 0; i < averageRating; i++) {
+          stars += '⭐️'
+        }
         rating = (
             <h3>
-              {averageRating} stars
+              {stars} stars
             </h3>
         )
         comments = data.place.comments.map(comment => {
@@ -49,12 +53,15 @@ function show (data) {
                         </h3>
                     </div>
                     <div className="col-sm-6">
-                        <h1>{ data.place.name }</h1>
+                        <h1><strong>{ data.place.name }</strong></h1>
+                        <h2>
+                            <strong>Rated:</strong>
+                        </h2>
                         <h2>
                             {rating}
                         </h2>
                         <h2>
-                            Description:
+                            <strong>Description:</strong>
                         </h2>
                         <h3>
                             {data.place.showEstablished()}
@@ -62,13 +69,10 @@ function show (data) {
                         <h4>
                             Serving {data.place.cuisines}
                         </h4>
-                        <p>
-                            no ratings yet
-                        </p>
                         <div className="row">
                             <div className="col-sm-6">
                                 <a href={`/places/${data.i}/edit`} className="btn btn-warning"> 
-                                    Edit
+                                    Edit 
                                 </a>
                             </div> 
                             <div className="col-sm-6">
@@ -113,3 +117,4 @@ function show (data) {
 }
 
 module.exports = show
+
