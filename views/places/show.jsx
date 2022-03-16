@@ -26,18 +26,21 @@ function show (data) {
               {stars} stars
             </h3>
         )
-        comments = data.place.comments.map(comment => {
+    
+        comments = data.place.comments.map(comment => { 
             return (
-                <div key={comment.id} className="border">
-                    <h2 className="rant">{comment.rant ? "Rant! 😡" : "Rave! 😻"}</h2>
-                    <h4>{comment.content}</h4>
-                    <h3>
-                        <strong>- {comment.author}</strong>
-                    </h3>
-                    <h4>Rating: {comment.stars}</h4>
-                    <form method="POST" action={`/places/${data.place.id}/comment/${comment.id}?_method=DELETE`}>
-                        <input type="submit" className="btn btn-danger" value="Delete Comment"/>
-                    </form>
+                <div className="col-sm-4">
+                    <div key={comment.id} className="border">
+                        <h2 className="rant">{comment.rant ? "Rant! 😡" : "Rave! 😻"}</h2>
+                        <h4>{comment.content}</h4>
+                        <h3>
+                            <strong>- {comment.author}</strong>
+                        </h3>
+                        <h4>Rating: {comment.stars}</h4>
+                        <form method="POST" action={`/places/${data.place.id}/comment/${comment.id}?_method=DELETE`}>
+                            <input type="submit" className="btn btn-danger" value="Delete Comment"/>
+                        </form>
+                    </div>
                 </div>
             )
         })
@@ -71,11 +74,11 @@ function show (data) {
                         </h4>
                         <div className="row">
                             <div className="col-sm-6">
-                            <a href={`/places/${data.place.id}/edit`} className="btn btn-warning">
+                                <a href={`/places/${data.place.id}/edit`} className="btn btn-warning">
                                     Edit 
-                                </a>
+                                </a> 
                             </div> 
-                            <div className="col-sm-6">
+                            <div className="col-sm-6"> 
                                 <form method="POST" action={`/places/${data.place.id}?_method=DELETE`}>
                                     <button type="submit" className="btn btn-danger">
                                         Delete
@@ -87,7 +90,9 @@ function show (data) {
                     <div>
                         <h3>Got Your Own Rant or Rave?</h3>
                         <h4>Comments:</h4>
+                        <div className="row">
                             {comments}
+                        </div>
                         <form method="POST" action={`/places/${data.place.id}/comment`} method="POST">
                             <div className="form-group col-sm-12">
                                 <label htmlFor="content">Content</label>
