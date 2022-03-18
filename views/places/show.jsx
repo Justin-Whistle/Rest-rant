@@ -93,7 +93,7 @@ function show (data) {
                         <div className="row">
                             {comments}
                         </div>
-                        <form method="POST" action={`/places/${data.place.id}/comment`} method="POST">
+                        <form method="POST" action={`/places/${data.place.id}/comment`}>
                             <div className="form-group col-sm-12">
                                 <label htmlFor="content">Content</label>
                                 <textarea id="content" name="content" class="form-control"></textarea> 
