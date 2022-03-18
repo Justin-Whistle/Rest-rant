@@ -32,7 +32,7 @@ function edit_form (data) {
                         <label htmlFor="founded">Founded</label>
                         <input className="form-control" id="founded" name="founded" value={data.place.founded} />
                     </div>
-                    <input className="btn btn-primary" type="submit" value="Update Place" />
+                    <input className="btn btn-primary" type="submit" value="Add Changes" />
                 </div>
             </form>
           </main>
