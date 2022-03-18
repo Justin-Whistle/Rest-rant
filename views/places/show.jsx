@@ -96,7 +96,7 @@ function show (data) {
                         <form method="POST" action={`/places/${data.place.id}/comment`}>
                             <div className="form-group col-sm-12">
                                 <label htmlFor="content">Content</label>
-                                <textarea id="content" name="content" class="form-control"></textarea> 
+                                <textarea id="content" name="content" className="form-control"></textarea> 
                             </div>
                             <div class="row">
                                 <div className="form-group col-sm-4">
