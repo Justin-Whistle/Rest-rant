@@ -22,5 +22,5 @@ app.get('*', (req, res) => {
 
 // app.listen(process.env.PORT)
 app.listen(PORT, () => {
-    console.log('Eating Bread at PORT', PORT);
+    console.log('Eating at PORT', PORT);
   })
